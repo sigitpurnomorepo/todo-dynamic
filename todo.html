@@ -30,26 +30,21 @@
     </nav>
 
     <section class="todo container d-flex flex-row my-5 gap-3">
-        <div class="card p-4 my-1" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <h3 class="">Todo</h3>
-            <div class="card p-4 my-1" ondragstart="dragStart(event)" draggable="true" id="judul-item-1">
+        <div 
+        class="card p-4 my-1 w-50" 
+        ondrop="drop(event)" 
+        ondragover="allowDrop(event)" 
+        id="todo-item"
+        >
+            <h3>Todo</h3>
+            <div 
+                class="card p-4 my-1" 
+                ondragstart="dragStart(event)" 
+                draggable="true" 
+                id="judul-item-1"
+            >
                 <article>
-                    <h3 class="">Judul Item 1</h3>
-                    <p class="">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Placeat ipsa iste est architecto vero beatae! Placeat id 
-                        nihil aliquid excepturi. Inventore, soluta nobis expedita 
-                        natus dolore quisquam eveniet recusandae repellat.
-                    </p>
-                    <div class="d-flex flex-row gap-1">
-                        <button class=" btn-edit rounded-2 btn btn-info text-white">Edit</button>
-                        <button class="btn-delete rounded-2 btn btn-danger">Delete</button>
-                    </div>
-                </article>
-            </div>
-            <div class="card p-4 my-1" ondragstart="dragStart(event)" draggable="true" id="judul-item-2">
-                <article>
-                    <h3>Judul Item 2</h3>
+                    <h3>Judul Item 1</h3>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                         Placeat ipsa iste est architecto vero beatae! Placeat id 
@@ -57,53 +52,38 @@
                         natus dolore quisquam eveniet recusandae repellat.
                     </p>
                     <div class="d-flex flex-row gap-1">
-                        <button class="btn-edit rounded-2 btn btn-info text-white">Edit</button>
-                        <button class="btn-delete rounded-2 btn btn-danger">Delete</button>
+                        <div class="d-flex flex-row gap-1">
+                            <button 
+                                type="button" 
+                                class="btn btn-info" 
+                                onclick="handleEdit(this.id)" 
+                                id="btn-edit"
+                            >Edit</button>
+                            <button 
+                                type="button" 
+                                class="btn btn-danger" 
+                                onclick="handleDelete(this.id)" 
+                                id="btn-delete"
+                            >Delete</button>
+                        </div>
                     </div>
                 </article>
-            </div>
-            <!-- <div class="card p-4 my-1">
-                <article>
-                    <h3>Judul Item</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Placeat ipsa iste est architecto vero beatae! Placeat id 
-                        nihil aliquid excepturi. Inventore, soluta nobis expedita 
-                        natus dolore quisquam eveniet recusandae repellat.
-                    </p>
-                    <div class="d-flex flex-row gap-1">
-                        <button class="btn-edit rounded-2 btn btn-info text-white">Edit</button>
-                        <button class="btn-delete rounded-2 btn btn-danger">Delete</button>
-                    </div>
-                </article>
-            </div>
-            <div class="card p-4 my-1">
-                <article>
-                    <h3>Judul Item</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Placeat ipsa iste est architecto vero beatae! Placeat id 
-                        nihil aliquid excepturi. Inventore, soluta nobis expedita 
-                        natus dolore quisquam eveniet recusandae repellat.
-                    </p>
-                    <div class="d-flex flex-row gap-1">
-                        <button class="btn-edit rounded-2 btn btn-info text-white">Edit</button>
-                        <button class="btn-delete rounded-2 btn btn-danger">Delete</button>
-                    </div>
-                </article>
-            </div> -->
+            </div> 
         </div>
 
-        <div class="card p-4 my-1" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div 
+            class="card p-4 my-1 w-50" 
+            ondrop="drop(event)" 
+            ondragover="allowDrop(event)" 
+            id="done-item"
+        >
             <h3>Done</h3>
-            
             <div 
                 class="card p-4 my-1"
                 ondragstart="dragStart(event)" 
                 draggable="true" 
-                id="judul-item-3"
+                id="judul-item-2"
             >
-
                 <article>
                     <h3>Judul Item 3</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
@@ -112,61 +92,30 @@
                         natus dolore quisquam eveniet recusandae repellat.
                     </p>
                         <div class="d-flex flex-row gap-1">
-                            <button class="btn-edit rounded-2 btn btn-info text-white">Edit</button>
-                            <button class="btn-delete rounded-2 btn btn-danger">Delete</button>
+                            <button 
+                                type="button" 
+                                class="btn btn-info" 
+                                onclick="handleEdit(this.id)" 
+                                id="btn-edit-1"
+                            >Edit</button>
+                            <button 
+                                type="button" 
+                                class="btn btn-danger" 
+                                onclick="handleDelete(this.id)" 
+                                id="btn-delete-1"
+                            >Delete</button>
                         </div>
                 </article>
             </div>
-            <div class="card p-4 my-1" ondragstart="dragStart(event)" draggable="true" id="judul-item-4">
-                <article>
-                    <h3>Judul Item 4</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Placeat ipsa iste est architecto vero beatae! Placeat id 
-                        nihil aliquid excepturi. Inventore, soluta nobis expedita 
-                        natus dolore quisquam eveniet recusandae repellat.
-                    </p>
-                    <div class="d-flex flex-row gap-1">
-                        <button class="btn-edit rounded-2 btn btn-info text-white">Edit</button>
-                        <button class="btn-delete rounded-2 btn btn-danger">Delete</button>
-                    </div>
-                </article>
-            </div>
-            <!-- <div class="card p-4 my-1">
-                <article>
-                    <h3>Judul Item</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Placeat ipsa iste est architecto vero beatae! Placeat id 
-                        nihil aliquid excepturi. Inventore, soluta nobis expedita 
-                        natus dolore quisquam eveniet recusandae repellat.
-                    </p>
-                    <div class="d-flex flex-row gap-1">
-                        <button class="btn-edit rounded-2 btn btn-info text-white">Edit</button>
-                        <button class="btn-delete rounded-2 btn btn-danger">Delete</button>
-                    </div>
-                </article>
-            </div>
-            <div class="card p-4 my-1">
-                <article>
-                    <h3>Judul Item</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Placeat ipsa iste est architecto vero beatae! Placeat id 
-                        nihil aliquid excepturi. Inventore, soluta nobis expedita 
-                        natus dolore quisquam eveniet recusandae repellat.
-                    </p>
-                    <div class="d-flex flex-row gap-1">
-                        <button class="btn-edit rounded-2 btn btn-info text-white">Edit</button>
-                        <button class="btn-delete rounded-2 btn btn-danger">Delete</button>
-                    </div>
-                </article>
-            </div> -->
+
         </div>
     </section>
 
     <div class="d-flex flex-row justify-content-center">
-        <button type="button" class="btn btn-primary mb-5">+ Tambahkan task</button>
+        <button type="button" class="btn btn-primary mb-5" id="btn-add">+ Tambahkan task</button>
     </div>
 
-    <footer class="bg-primary position-static bottom-0 py-2">
+    <footer class="bg-primary sticky-bottom py-2">
         <h3 class="text-center text-white mb-1">12:45:10</h3>
         <p class="text-center text-white mb-1">&copy;2023 Sigit Purnomo</p>
     </footer>
