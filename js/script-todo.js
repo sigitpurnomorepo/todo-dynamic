@@ -85,5 +85,14 @@ function handleDelete(id) {
     const card = btnDelete.parentNode.parentNode;
 
     card.setAttribute("class", "d-none");
-
 }
+
+function showRealtimeClock() {
+    const footerRealtimeClock = document.getElementById("footer-time");
+    const time = new Date();
+    footerRealtimeClock.innerHTML = time.toLocaleTimeString([], {
+        hour12: false,
+    });
+}
+
+setInterval(showRealtimeClock, 1000);
