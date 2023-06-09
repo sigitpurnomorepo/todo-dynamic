@@ -80,4 +80,10 @@ function handleEdit(id) {
     p.innerHTML = description;
 }
 
+function handleDelete(id) {
+    const btnDelete = document.getElementById(id);
+    const card = btnDelete.parentNode.parentNode;
 
+    card.setAttribute("class", "d-none");
+
+}
