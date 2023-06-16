@@ -13,6 +13,8 @@ function drop(event) {
     event.target.appendChild(document.getElementById(data));
 }
 
+// Fetch Task
+const todo = document.getElementById("todo-item");
 window.onload = function () {
     // Ajax call to fetch data
     // Create an XMLHttpRequest object
@@ -79,20 +81,15 @@ window.onload = function () {
     xhr.send();
 };
 
-// Fungsi Add Task Button
-const btnAdd = document.getElementById("btn-add");
-const todo = document.getElementById("todo-item");
-btnAdd.addEventListener("click", (event) => {
+// Fungsi Add
+const addForm = document.getElementById("add-form");
+addForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const title = window.prompt("Masukkan judul");
-    const description = window.prompt("Masukkan deskripsi");
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
 
-    // Tes pengambilan value
-    //console.log(title, description);
-
-    // Validasi dalam proses create task baru
-    if (title && description != "") {
+    if (title && description) {
         const card = document.createElement("div");
         const article = document.createElement("article");
         const h3 = document.createElement("h3");
@@ -104,7 +101,7 @@ btnAdd.addEventListener("click", (event) => {
         card.setAttribute("class", "card p-4 my-1");
         card.setAttribute("ondragstart", "dragStart(event)");
         card.setAttribute("draggable", "true");
-        card.setAttribute("id", title);
+        card.setAttribute("id", title + description);
 
         h3.appendChild(document.createTextNode(title));
         p.appendChild(document.createTextNode(description));
@@ -116,12 +113,12 @@ btnAdd.addEventListener("click", (event) => {
         btnEdit.setAttribute("type", "button");
         btnEdit.setAttribute("class", "btn btn-info text-white");
         btnEdit.setAttribute("onclick", "handleEdit(this.id)");
-        btnEdit.setAttribute("id", "edit-" + description);
+        btnEdit.setAttribute("id", "edit-" + title + description);
         btnEdit.appendChild(document.createTextNode("Edit"));
         btnDelete.setAttribute("type", "button");
         btnDelete.setAttribute("class", "btn btn-danger");
         btnDelete.setAttribute("onclick", "handleDelete(this.id)");
-        btnDelete.setAttribute("id", "delete-" + description);
+        btnDelete.setAttribute("id", "delete-" + title + description);
         btnDelete.appendChild(document.createTextNode("Delete"));
 
         btnWrapper.appendChild(btnEdit);
@@ -131,9 +128,38 @@ btnAdd.addEventListener("click", (event) => {
         card.appendChild(article);
 
         todo.appendChild(card);
+
+        // Process update data in localStorage from DOM
+        // Create new object task
+        const task = {
+            id: title + description,
+            title: title,
+            desc: description
+        }
+
+        // Get current data in localStorage & push new data from object task
+        const data = JSON.parse(localStorage.getItem("data"));
+        data.push(task);
+
+        // Rewrite data in localStorage
+        localStorage.setItem("data", JSON.stringify(data));
+
+        // Close modal
+        const modalAdd = bootstrap.Modal.getInstance('#myModalAdd');
+        modalAdd.hide();
+
+        // Clear form 
+        addForm.reset();
+
     } else {
-        alert("Inputan tidak boleh kosong!")
-    }
+        const toastAdd = document.getElementById('liveToastAdd');
+        const toast = new bootstrap.Toast(toastAdd);
+        toast.show();
+    };
+    // Check if title & description exist
+    // if yes, save item to localStorage
+    // next render to html / render DOM
+    // if No, show toast
 })
 
 // Fungsi edit task
