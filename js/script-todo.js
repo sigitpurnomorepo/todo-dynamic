@@ -13,7 +13,73 @@ function drop(event) {
     event.target.appendChild(document.getElementById(data));
 }
 
-// Fungsi Add Task
+window.onload = function () {
+    // Ajax call to fetch data
+    // Create an XMLHttpRequest object
+    const xhr = new XMLHttpRequest();
+    const url = "/data/data-task.json";
+
+    // Check status request, if respone is true then run the process
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // Check data wheter already in localStorage
+            let data = JSON.parse(localStorage.getItem("data"));
+
+            // If not, save data to localStorage
+            if (!data) {
+                localStorage.setItem("data", this.response);
+                data = JSON.parse(localStorage.getItem("data"));
+            }
+
+            // Render data to html
+            for (let i = 0; i < data.length; i++) {
+                const card = document.createElement("div");
+                const article = document.createElement("article");
+                const h3 = document.createElement("h3");
+                const p = document.createElement("p");
+                const btnWrapper = document.createElement("div");
+                const btnEdit = document.createElement("button");
+                const btnDelete = document.createElement("button");
+
+                card.setAttribute("class", "card p-4 my-1");
+                card.setAttribute("ondragstart", "dragStart(event)");
+                card.setAttribute("draggable", "true");
+                card.setAttribute("id", data[i].id);
+
+                h3.appendChild(document.createTextNode(data[i].title));
+                p.appendChild(document.createTextNode(data[i].desc));
+
+                article.appendChild(h3);
+                article.appendChild(p);
+
+                btnWrapper.setAttribute("class", "d-flex flex-row gap-1");
+                btnEdit.setAttribute("type", "button");
+                btnEdit.setAttribute("class", "btn btn-info text-white");
+                btnEdit.setAttribute("onclick", "handleEdit(this.id)");
+                btnEdit.setAttribute("id", "edit-" + data[i].id);
+                btnEdit.appendChild(document.createTextNode("Edit"));
+                btnDelete.setAttribute("type", "button");
+                btnDelete.setAttribute("class", "btn btn-danger");
+                btnDelete.setAttribute("onclick", "handleDelete(this.id)");
+                btnDelete.setAttribute("id", "delete-" + data[i].id);
+                btnDelete.appendChild(document.createTextNode("Delete"));
+
+                btnWrapper.appendChild(btnEdit);
+                btnWrapper.appendChild(btnDelete);
+
+                article.appendChild(btnWrapper);
+                card.appendChild(article);
+
+                todo.appendChild(card);
+            }
+        }
+    };
+
+    xhr.open('GET', url, true);
+    xhr.send();
+};
+
+// Fungsi Add Task Button
 const btnAdd = document.getElementById("btn-add");
 const todo = document.getElementById("todo-item");
 btnAdd.addEventListener("click", (event) => {
