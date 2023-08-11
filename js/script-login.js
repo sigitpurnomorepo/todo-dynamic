@@ -19,4 +19,5 @@ btnLogin.addEventListener("click", (event) => {
     } else {
         window.alert("Email dan Password tidak boleh kosong!");
         // }
-    })
+    }
+})
