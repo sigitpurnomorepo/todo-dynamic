@@ -61,7 +61,7 @@ window.onload = function () {
                 btnEdit.setAttribute("data-bs-target", "#myModalEdit");
                 btnEdit.setAttribute("data-title", data[i].title);
                 btnEdit.setAttribute("data-description", data[i].desc);
-                btnEdit.setAttribute("data-id", "edit-" + data[i].id);
+                btnEdit.setAttribute("data-id", data[i].id);
                 btnEdit.appendChild(document.createTextNode("Edit"));
                 btnDelete.setAttribute("type", "button");
                 btnDelete.setAttribute("class", "btn btn-danger");
@@ -120,7 +120,7 @@ addForm.addEventListener('submit', (event) => {
         btnEdit.setAttribute("data-bs-target", "#myModalEdit");
         btnEdit.setAttribute("data-title", title);
         btnEdit.setAttribute("data-description", description);
-        btnEdit.setAttribute("data-id", "edit-" + title + description);
+        btnEdit.setAttribute("data-id", title + description);
         btnEdit.appendChild(document.createTextNode("Edit"));
         btnDelete.setAttribute("type", "button");
         btnDelete.setAttribute("class", "btn btn-danger");
@@ -194,8 +194,8 @@ modalEdit.addEventListener("show.bs.modal", (event) => {
 
         if (newTitle && newDescription) {
             // Save to localStorage & update DOM
-            console.log(sameTasks[0]);
-            console.log(document.getElementById(sameTasks[0].id));
+            // console.log(sameTasks[0]);
+            // console.log(document.getElementById(sameTasks[0].id));
             document.getElementById(
                 sameTasks[0].id
             ).firstChild.childNodes[0].innerHTML = newTitle;
@@ -204,7 +204,7 @@ modalEdit.addEventListener("show.bs.modal", (event) => {
             ).firstChild.childNodes[1].innerHTML = newDescription;
             document.getElementById(
                 sameTasks[0].id
-            ).setAttribute("id", newTitle + newDescription);
+            ).setAttribute("data-id", newTitle + newDescription);
 
             document.querySelector(".btn-edit").setAttribute("data-title", newTitle);
             document.querySelector(".btn-edit").setAttribute("data-description", newDescription);
