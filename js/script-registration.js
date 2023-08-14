@@ -15,7 +15,15 @@ if (toastTrigger) {
         const confirmPassword = document.getElementById("confirm-password").value;
 
         if (email && fullname && password && confirmPassword) {
-            window.location.href = "/todo.html"
+            if (password != confirmPassword) {
+                const toast = new bootstrap.Toast(toastLiveExample);
+                let toastBody = document.getElementById("toast-body");
+                toastBody.innerHTML = "Password tidak sama"
+
+                toast.show();
+            } else {
+                window.location.href = "/todo.html"
+            }
         } else {
             const toast = new bootstrap.Toast(toastLiveExample);
 
